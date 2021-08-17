@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#30l+4-kn95(4))otxj96%g6r+q#=q*ud9cy$k)p5zpgw$wfw9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # otras librerias #
+    'django_extensions',
+    'rest_framework',
+    'django_filters',
+    # aplicaciones propias #
+    'visor',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +129,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Django Extensions
+GRAPH_MODELS = {
+  'app_labels': ["visor",],
+}
