@@ -80,7 +80,7 @@ class FactorDesagregacion(models.Model):
 class ValorFactor(models.Model):
     valor = models.CharField(("Valor"), max_length=150, blank=True, null=True)
     codigo = models.CharField(("Codigo"), max_length=50, blank=True, null=True)
-    categoria = models.ForeignKey("visor.FactorDesagregacion", on_delete=models.CASCADE, blank=True, null=True)
+    categoria = models.ForeignKey("visor.FactorDesagregacion", related_name='valores',on_delete=models.CASCADE, blank=True, null=True)
     
     class Meta:
         verbose_name = 'Valor Factor'
