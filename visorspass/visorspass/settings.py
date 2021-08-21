@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # otras librerias #
     'django_extensions',
     'rest_framework',
-    'django_filters',
+    #'django_filters',
     # aplicaciones propias #
     'visor',
 ]
