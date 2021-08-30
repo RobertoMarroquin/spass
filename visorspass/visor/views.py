@@ -92,6 +92,7 @@ class IndicadorList(generics.ListCreateAPIView):
     queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
 
+
 class MedicionIndicadorList(generics.ListCreateAPIView):
     queryset = MedicionIndicador.objects.all()
     serializer_class = H_MedicionSerializer

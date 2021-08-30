@@ -122,9 +122,9 @@ class MedicionIndicador(models.Model):
     indicador = models.ForeignKey("visor.Indicador", on_delete=models.CASCADE, related_name="mediciones")
     valores_factor = models.ManyToManyField("visor.ValorFactor")
     area = models.ForeignKey('visor.Area', related_name='indicadores', on_delete=models.CASCADE)
-    valor_medicion = models.CharField('Codigo', max_length=50)
-    valor_etario_inicial = models.IntegerField(("Valor Etario Inicial"))
-    valor_etario_final = models.IntegerField(("Valor Etario Final"))
+    valor_medicion = models.CharField('Valor de Medicion', max_length=50)
+    valor_etario_inicial = models.IntegerField(("Valor Etario Inicial"),blank=True, null=True)
+    valor_etario_final = models.IntegerField(("Valor Etario Final"),blank=True, null=True)
     
     class Meta:
         verbose_name = 'Medicion de Indicador'

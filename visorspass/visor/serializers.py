@@ -158,5 +158,5 @@ class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
     class Meta:
-        model = Variable
+        model = MedicionIndicador
         fields = '__all__'
