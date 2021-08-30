@@ -27,6 +27,8 @@ def api_root(request, format=None, **kwargs):
         'unidadMedida': reverse('visor:unidadMedida-lista',request=request,format=format),
         'variable': reverse('visor:variable-lista',request=request,format=format),
         'indicador': reverse('visor:indicador-lista',request=request,format=format),
+        'medicion': reverse('visor:medicion-lista',request=request,format=format),
+
     })
 
 
@@ -90,6 +92,10 @@ class IndicadorList(generics.ListCreateAPIView):
     queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
 
+class MedicionIndicadorList(generics.ListCreateAPIView):
+    queryset = MedicionIndicador.objects.all()
+    serializer_class = H_MedicionSerializer
+
 
 #Detalles API
 class EjeDetail(generics.RetrieveDestroyAPIView):
@@ -150,6 +156,10 @@ class VariableDetail(generics.RetrieveDestroyAPIView):
 class IndicadorDetail(generics.RetrieveDestroyAPIView):
     queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
+
+class MedicionIndicadorDetail(generics.RetrieveDestroyAPIView):
+    queryset = MedicionIndicador.objects.all()
+    serializer_class = H_MedicionSerializer    
 
 
 #ViewSets CRUDS Completos

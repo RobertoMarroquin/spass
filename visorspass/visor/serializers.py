@@ -76,7 +76,7 @@ class H_DepartamentoSerializer(serializers.HyperlinkedModelSerializer):
 
 class H_FactorDesagregacionSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
-    url = serializers.HyperlinkedIdentityField(view_name="visor:eje-detalle")
+    url = serializers.HyperlinkedIdentityField(view_name="visor:factorDesagregacion-detalle")
     #valores = H_ValorFactorSerializer(many=True, read_only=True)
     class Meta:
         model = FactorDesagregacion
@@ -114,7 +114,7 @@ class H_AreaSerializer(serializers.HyperlinkedModelSerializer):
 class H_ValorFactorSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:valorFactor-detalle")
-    categoria = H_MunicipioSerializer(many=False, read_only=True)
+    categoria = H_FactorDesagregacionSerializer(many=False, read_only=True)
     class Meta:
         model = ValorFactor
         fields = '__all__'
@@ -150,3 +150,13 @@ class H_IndicadorSerializer(serializers.HyperlinkedModelSerializer):
         model = Indicador
         fields = '__all__'
 
+
+class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
+    url = serializers.HyperlinkedIdentityField(view_name="visor:medicion-detalle")
+    indicador = H_IndicadorSerializer(many=False, read_only=True)
+    valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
+    area = H_AreaSerializer(many=False, read_only=True)
+    class Meta:
+        model = Variable
+        fields = '__all__'
