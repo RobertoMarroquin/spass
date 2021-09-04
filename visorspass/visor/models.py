@@ -125,7 +125,8 @@ class MedicionIndicador(models.Model):
     valor_medicion = models.CharField('Valor de Medicion', max_length=50)
     valor_etario_inicial = models.IntegerField(("Valor Etario Inicial"),blank=True, null=True)
     valor_etario_final = models.IntegerField(("Valor Etario Final"),blank=True, null=True)
-    
+    fecha = models.DateTimeField(("Fecha"), auto_now=False, auto_now_add=False,blank=True, null=True)
+
     class Meta:
         verbose_name = 'Medicion de Indicador'
  
