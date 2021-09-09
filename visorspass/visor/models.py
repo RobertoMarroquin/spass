@@ -137,7 +137,9 @@ class MedicionIndicador(models.Model):
 class Area(models.Model):
     nombre = models.CharField('Nombre', max_length=150, blank=True, null=True)
     descripcion = models.TextField("Descripcion", blank=True, null=True)
-    municipio = models.ForeignKey('visor.municipio', related_name='areas', on_delete=models.CASCADE, blank=True, null=True)
+    municipio = models.ForeignKey('visor.municipio', related_name='areas', on_delete=models.CASCADE,blank=True, null=True)
+    latitud = models.FloatField(("Latitud"), blank=True, null=True)
+    longitud = models.FloatField(("Longitud"), blank=True, null=True)
 
     class Meta:
         verbose_name = 'Area'
