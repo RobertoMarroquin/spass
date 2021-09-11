@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.filters import SearchFilter
 
 from .models import *
 
@@ -157,6 +158,8 @@ class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     indicador = serializers.HyperlinkedIdentityField(view_name="visor:indicador-detalle")
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
+    filter_backends = (SearchFilter,)
+    
 
     class Meta:
         model = MedicionIndicador

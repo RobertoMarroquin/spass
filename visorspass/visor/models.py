@@ -89,7 +89,7 @@ class ValorFactor(models.Model):
     def __str__(self):
 
 
-        return f'{self.valor}' 
+        return f'{self.categoria}--{self.valor}' 
 
 
 class Variable(models.Model):
