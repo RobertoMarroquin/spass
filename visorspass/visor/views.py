@@ -94,8 +94,13 @@ class IndicadorList(generics.ListCreateAPIView):
 
 
 class MedicionIndicadorList(generics.ListCreateAPIView):
-    queryset = MedicionIndicador.objects.all()
     serializer_class = H_MedicionSerializer
+    def get_queryset(self):
+        if 'indicador' in self.kwargs:
+            indicador = self.kwargs['indicador']
+        else:
+            indicador = None
+        return MedicionIndicador.objects.all().exclude(indicador__id=indicador) if indicador else MedicionIndicador.objects.all()
 
 
 #Detalles API

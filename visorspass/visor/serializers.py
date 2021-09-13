@@ -158,9 +158,6 @@ class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     indicador = serializers.HyperlinkedIdentityField(view_name="visor:indicador-detalle")
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
-    filter_backends = (SearchFilter,)
-    
-
     class Meta:
         model = MedicionIndicador
         fields = '__all__'

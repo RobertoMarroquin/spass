@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.urls.conf import re_path
 from .views import *
 
 from rest_framework.routers import DefaultRouter
@@ -55,5 +56,6 @@ urlpatterns = [
     path("indicador/detalle/<int:pk>", IndicadorDetail.as_view(), name="indicador-detalle"),
     #MedicionIndicador API
     path("medicion/lista/", MedicionIndicadorList.as_view(), name="medicion-lista"),
+    path("medicion/lista/<int:indicador>/", MedicionIndicadorList.as_view(), name="medicion-lista-indicador"),
     path("medicion/detalle/<int:pk>", MedicionIndicadorDetail.as_view(), name="medicion-detalle"),
 ]# + router.urls
