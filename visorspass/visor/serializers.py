@@ -155,10 +155,10 @@ class H_IndicadorSerializer(serializers.HyperlinkedModelSerializer):
 class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:medicion-detalle")
-    indicador = serializers.HyperlinkedIdentityField(view_name="visor:indicador-detalle")
+    indicador = serializers.HyperlinkedRelatedField(view_name="visor:indicador-detalle")
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
-    institucion = serializers.HyperlinkedIdentityField(view_name="visor:institucion-detalle")
+    institucion = serializers.HyperlinkedRelatedField(view_name="visor:institucion-detalle")
     class Meta:
         model = MedicionIndicador
         fields = '__all__'

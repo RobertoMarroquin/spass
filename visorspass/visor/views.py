@@ -100,7 +100,7 @@ class MedicionIndicadorList(generics.ListCreateAPIView):
             indicador = self.kwargs['indicador']
         else:
             indicador = None
-        return MedicionIndicador.objects.all().exclude(indicador__id=indicador) if indicador else MedicionIndicador.objects.all()
+        return MedicionIndicador.objects.all().filter(indicador__id=indicador) if indicador else MedicionIndicador.objects.all()
 
 
 #Detalles API
