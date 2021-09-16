@@ -74,8 +74,14 @@ class AreaList(generics.ListCreateAPIView):
 
 
 class ValorFactorList(generics.ListCreateAPIView):
-    queryset = ValorFactor.objects.all()
     serializer_class = H_ValorFactorSerializer
+    def get_queryset(self):
+        if 'categoria' in self.kwargs:
+            categoria = self.kwargs['categoria']
+        else:
+            categoria = None
+        return ValorFactor.objects.all().filter(categoria=categoria) if categoria else ValorFactor.objects.all()
+
 
 
 class UnidadMedidaList(generics.ListCreateAPIView):

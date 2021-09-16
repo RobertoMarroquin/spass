@@ -44,6 +44,7 @@ urlpatterns = [
     path("area/detalle/<int:pk>", AreaDetail.as_view(), name="area-detalle"),
     #ValorFactor API
     path("valorFactor/lista/", ValorFactorList.as_view(), name="valorFactor-lista"),
+    path("valorFactor/lista/<int:categoria>", ValorFactorList.as_view(), name="valorFactor-lista-filtrada"),
     path("valorFactor/detalle/<int:pk>", ValorFactorDetail.as_view(), name="valorFactor-detalle"),
     #UnidadMedida API
     path("unidadMedida/lista/", UnidadMedidaList.as_view(), name="unidadMedida-lista"),
