@@ -96,7 +96,7 @@ class H_ResultadoSerializer(serializers.HyperlinkedModelSerializer):
 
 class H_MunicipioSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
-    url = serializers.HyperlinkedIdentityField(view_name="visor:municipio-detalle")
+    url = serializers.HyperlinkedIdentityField(view_name="visor:municipio-detalle",)
     departamento = H_DepartamentoSerializer(many=False, read_only=True)
     class Meta:
         model = Municipio
@@ -155,10 +155,10 @@ class H_IndicadorSerializer(serializers.HyperlinkedModelSerializer):
 class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:medicion-detalle")
-    indicador = serializers.HyperlinkedRelatedField(view_name="visor:indicador-detalle")
+    indicador = serializers.HyperlinkedRelatedField(view_name="visor:indicador-detalle",read_only=True)
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
-    institucion = serializers.HyperlinkedRelatedField(view_name="visor:institucion-detalle")
+    institucion = serializers.HyperlinkedRelatedField(view_name="visor:institucion-detalle",read_only=True)
     class Meta:
         model = MedicionIndicador
         fields = '__all__'
