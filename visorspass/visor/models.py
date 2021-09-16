@@ -44,7 +44,9 @@ class Indicador(models.Model):
     factores_desagregacion = models.ManyToManyField('visor.FactorDesagregacion', related_name='indicadores')
     fuentes_informacion = models.ManyToManyField('visor.FuenteInformacion', related_name='indicadores')
     instituciones = models.ManyToManyField('visor.Institucion', related_name='indicadores')
+    usa_area = models.BooleanField(("Usa Area"), default=False)
     
+
     class Meta:
         verbose_name = ("Indicador")
         verbose_name_plural = ("Indicadores")
