@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework.filters import SearchFilter
+from rest_framework.relations import ManyRelatedField
 
 from .models import *
 
@@ -78,12 +79,13 @@ class H_DepartamentoSerializer(serializers.HyperlinkedModelSerializer):
 class H_FactorDesagregacionSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:factorDesagregacion-detalle")
-    #valores = H_ValorFactorSerializer(many=True, read_only=True)
+    #valores = serializers.HyperlinkedRelatedField(view_name='visor:valorFactor-detalle',many=True, read_only=True,)
+    valores = serializers.SlugRelatedField(many=True,read_only=True,slug_field='valor')
     class Meta:
         model = FactorDesagregacion
-        fields = '__all__'
-
-
+        fields ='__all__'
+    
+    
 class H_ResultadoSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:resultado-detalle")
