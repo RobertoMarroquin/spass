@@ -85,7 +85,7 @@ class H_FactorDesagregacionSerializer(serializers.HyperlinkedModelSerializer):
         model = FactorDesagregacion
         fields ='__all__'
     
-    
+
 class H_ResultadoSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:resultado-detalle")
@@ -117,7 +117,7 @@ class H_AreaSerializer(serializers.HyperlinkedModelSerializer):
 class H_ValorFactorSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:valorFactor-detalle")
-    categoria = H_FactorDesagregacionSerializer(many=False, read_only=True)
+    categoria = serializers.HyperlinkedRelatedField(view_name="visor:factorDesagregacion-detalle",read_only=True)#H_FactorDesagregacionSerializer(many=False, read_only=True)
     class Meta:
         model = ValorFactor
         fields = '__all__'
