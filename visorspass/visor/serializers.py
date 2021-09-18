@@ -117,10 +117,18 @@ class H_AreaSerializer(serializers.HyperlinkedModelSerializer):
 class H_ValorFactorSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:valorFactor-detalle")
-    categoria = serializers.HyperlinkedRelatedField(view_name="visor:factorDesagregacion-detalle",read_only=True)#H_FactorDesagregacionSerializer(many=False, read_only=True)
+    #categoria = serializers.HyperlinkedRelatedField(view_name="visor:factorDesagregacion-detalle",read_only=True)
+    categoria = serializers.PrimaryKeyRelatedField(read_only=True)
+    categoria_nombre = serializers.SerializerMethodField('get_nombre_from_categoria')
+    
     class Meta:
         model = ValorFactor
-        fields = '__all__'
+        fields = ['pk','url','valor','codigo','categoria','categoria_nombre',]
+
+    def get_nombre_from_categoria(self, valor):
+        categoria_nombre = valor.categoria.nombre
+        return f'{categoria_nombre}'
+
 
 
 class H_UnidadMedidaSerializer(serializers.HyperlinkedModelSerializer):
