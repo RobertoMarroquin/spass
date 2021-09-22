@@ -41,9 +41,9 @@ class Indicador(models.Model):
     formula = models.TextField(("Formula"),blank=True, null=True)
     
     variable = models.ForeignKey('visor.Variable', related_name='indicador', on_delete=models.CASCADE,blank=True, null=True)
-    factores_desagregacion = models.ManyToManyField('visor.FactorDesagregacion', related_name='indicadores')
-    fuentes_informacion = models.ManyToManyField('visor.FuenteInformacion', related_name='indicadores')
-    instituciones = models.ManyToManyField('visor.Institucion', related_name='indicadores')
+    factores_desagregacion = models.ManyToManyField('visor.FactorDesagregacion', related_name='indicadores',blank=True)
+    fuentes_informacion = models.ManyToManyField('visor.FuenteInformacion', related_name='indicadores',blank=True)
+    instituciones = models.ManyToManyField('visor.Institucion', related_name='indicadores',blank=True)
     usa_area = models.BooleanField(("Usa Area"), default=False)
     
 
