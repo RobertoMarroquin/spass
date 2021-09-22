@@ -167,6 +167,7 @@ class MedicionIndicadorAdmin(admin.ModelAdmin):
         'codigo',
         'contenido',
         'indicador',
+        'fecha',
         'valor_medicion',
         'valor_etario_inicial',
         'valor_etario_final',
