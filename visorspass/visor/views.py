@@ -80,7 +80,7 @@ class ValorFactorList(generics.ListCreateAPIView):
             categoria = self.kwargs['categoria']
         else:
             categoria = None
-        return ValorFactor.objects.all().filter(categoria=categoria) if categoria else ValorFactor.objects.all()
+        return ValorFactor.objects.all().filter(categoria=categoria,mostrar=True) if categoria else ValorFactor.objects.all()
 
 
 
