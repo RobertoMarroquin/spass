@@ -45,7 +45,7 @@ class Indicador(models.Model):
     fuentes_informacion = models.ManyToManyField('visor.FuenteInformacion', related_name='indicadores',blank=True)
     instituciones = models.ManyToManyField('visor.Institucion', related_name='indicadores',blank=True)
     usa_area = models.BooleanField(("Usa Area"), default=False)
-    
+    mostrar = models.BooleanField("Mostrar indicador", default=False)
 
     class Meta:
         verbose_name = ("Indicador")
