@@ -80,7 +80,7 @@ class ValorFactorList(generics.ListCreateAPIView):
             categoria = self.kwargs['categoria']
         else:
             categoria = None
-        return ValorFactor.objects.all().filter(categoria=categoria,mostrar=True) if categoria else ValorFactor.objects.all().filter(mostrar=True)
+        return ValorFactor.objects.all().filter(categoria=categoria) if categoria else ValorFactor.objects.all().filter()
 
 
 
@@ -95,8 +95,10 @@ class VariableList(generics.ListCreateAPIView):
 
 
 class IndicadorList(generics.ListCreateAPIView):
-    queryset = Indicador.objects.all()
+    #queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
+    def get_queryset(self):
+        return Indicador.objects.all().filter(mostrar=True)
 
 
 class MedicionIndicadorList(generics.ListCreateAPIView):
