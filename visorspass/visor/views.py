@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from django.db.models import Count
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -98,7 +99,11 @@ class IndicadorList(generics.ListCreateAPIView):
     #queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
     def get_queryset(self):
-        return Indicador.objects.all().filter(mostrar=True)
+        indicadores = Indicador.objects.all().filter(mostrar=True)
+        indicadores = indicadores.annotate(
+            num_desagregacion = Count('mediciones__valores_factor')
+        ).filter(num_desagregacion__gt=0)
+        return indicadores
 
 
 class MedicionIndicadorList(generics.ListCreateAPIView):
