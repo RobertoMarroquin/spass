@@ -205,7 +205,7 @@ class GraficaSerializer(serializers.ModelSerializer):
     
 
 class FactorDesagregacionSerializer(serializers.ModelSerializer):
-    valores = serializers.SlugRelatedField(slug_field='valores', many=True,read_only=True)
+    valores = serializers.SlugRelatedField(slug_field='valor', many=True,read_only=True)
     class Meta:
         model = FactorDesagregacion
         fields = ['nombre','valores']
