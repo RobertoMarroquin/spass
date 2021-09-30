@@ -29,12 +29,6 @@ class DepartamentoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FactorDesagregacionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FactorDesagregacion
-        fields = '__all__'
-
-
 class ResultadoSerializer(serializers.ModelSerializer):
     eje = EjeSerializer(many=False, read_only=True, required=False)
     eje_codigo = serializers.ReadOnlyField(source='eje.codigo')
@@ -210,9 +204,17 @@ class GraficaSerializer(serializers.ModelSerializer):
         fields = ['indicador','contenido','valor_medicion','institucion','area','valores_factor', ]
     
 
+class FactorDesagregacionSerializer(serializers.ModelSerializer):
+    valores = serializers.SlugRelatedField(slug_field='valores', many=True,read_only=True)
+    class Meta:
+        model = FactorDesagregacion
+        fields = ['nombre','valores']
+
+
 class IndicadorGrafico(serializers.ModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
-    factores_desagregacion = serializers.SlugRelatedField(slug_field='nombre', many=True, read_only=True)
+    factores_desagregacion = FactorDesagregacionSerializer(many=True, read_only=True)
+    #serializers.SlugRelatedField(slug_field='nombre', many=True, read_only=True)
     class Meta:
         model = Indicador
         fields = ['pk','nombre','factores_desagregacion']
