@@ -130,7 +130,6 @@ class H_ValorFactorSerializer(serializers.HyperlinkedModelSerializer):
         return f'{categoria_nombre}'
 
 
-
 class H_UnidadMedidaSerializer(serializers.HyperlinkedModelSerializer):
     pk = serializers.PrimaryKeyRelatedField(read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name="visor:unidadMedida-detalle")
@@ -169,6 +168,42 @@ class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
     institucion = serializers.HyperlinkedRelatedField(view_name="visor:institucion-detalle",read_only=True)
+    fecha = serializers.SerializerMethodField('get_ano')
+
     class Meta:
         model = MedicionIndicador
-        fields = '__all__'
+        fields = [
+            "pk",
+            "url",
+            "codigo",
+            "contenido",
+            'valor_medicion',
+            'valor_etario_inicial',
+            'valor_etario_final',
+            'fecha',
+            "indicador",
+            "valores_factor",
+            "area",
+            "institucion",
+        ]
+
+    def get_ano(self,medicion):
+        ano = medicion.fecha.year if medicion.fecha is not None else "" 
+        return f'{ano}'
+
+
+#-----------------------------------Grafica-------------------------------------#
+class ValorFactorSerializers(serializers.ModelSerializer):
+    categoria = serializers.SlugRelatedField(read_only=True,slug_field='nombre')
+    class Meta:
+        model = ValorFactor
+        fields = ['valor','categoria',]
+
+
+class GraficaSerializer(serializers.ModelSerializer):
+    indicador = serializers.PrimaryKeyRelatedField(read_only=True)
+    valores_factor = ValorFactorSerializers(many=True, read_only=True)#serializers.SerializerMethodField('get_valores')
+    class Meta:
+        model = MedicionIndicador
+        fields = ['indicador','contenido','valor_medicion','valores_factor']
+    

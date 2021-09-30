@@ -29,8 +29,19 @@ def api_root(request, format=None, **kwargs):
         'variable': reverse('visor:variable-lista',request=request,format=format),
         'indicador': reverse('visor:indicador-lista',request=request,format=format),
         'medicion': reverse('visor:medicion-lista',request=request,format=format),
+        #'grafica': reverse('visor:grafica',request=request,format=format),
 
     })
+
+#Grafica
+class GraficaV(generics.ListCreateAPIView):
+    serializer_class = GraficaSerializer
+    def get_queryset(self):
+        if 'indicador' in self.kwargs:
+            indicador = self.kwargs['indicador']
+        else:
+            indicador = None
+        return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
 
 
 #Listas API
@@ -84,7 +95,6 @@ class ValorFactorList(generics.ListCreateAPIView):
         return ValorFactor.objects.all().filter(categoria=categoria) if categoria else ValorFactor.objects.all().filter()
 
 
-
 class UnidadMedidaList(generics.ListCreateAPIView):
     queryset = UnidadMedida.objects.all()
     serializer_class = H_UnidadMedidaSerializer
@@ -100,9 +110,9 @@ class IndicadorList(generics.ListCreateAPIView):
     serializer_class = H_IndicadorSerializer
     def get_queryset(self):
         indicadores = Indicador.objects.all().filter(mostrar=True)
-        indicadores = indicadores.annotate(
-            num_desagregacion = Count('mediciones__valores_factor')
-        ).filter(num_desagregacion__gt=0)
+        #indicadores = indicadores.annotate(
+        #    num_desagregacion = Count('mediciones__valores_factor')
+        #).filter(num_desagregacion__gt=0)
         return indicadores
 
 
@@ -113,7 +123,7 @@ class MedicionIndicadorList(generics.ListCreateAPIView):
             indicador = self.kwargs['indicador']
         else:
             indicador = None
-        return MedicionIndicador.objects.all().filter(indicador__id=indicador) if indicador else MedicionIndicador.objects.all()
+        return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
 
 
 #Detalles API
@@ -228,4 +238,3 @@ def indicador_detail(request, pk):
         "periodicidad": indicador.get_periodicidad_display()
     }}
     return JsonResponse(data)
-
