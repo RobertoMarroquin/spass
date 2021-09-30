@@ -1,9 +1,9 @@
+# Rest-Framework
 from rest_framework import serializers
 from rest_framework.filters import SearchFilter
-from rest_framework.relations import ManyRelatedField
-
+from rest_framework.relations import ManyRelatedField, PrimaryKeyRelatedField
+# Self
 from .models import *
-
 
 class EjeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -204,7 +204,15 @@ class GraficaSerializer(serializers.ModelSerializer):
     indicador = serializers.PrimaryKeyRelatedField(read_only=True)
     valores_factor = ValorFactorSerializers(many=True, read_only=True)#serializers.SerializerMethodField('get_valores')
     area = serializers.SlugRelatedField(slug_field='nombre',read_only=True)
+    institucion = serializers.SlugRelatedField(slug_field='codigo',read_only=True)
     class Meta:
         model = MedicionIndicador
-        fields = ['indicador','contenido','valor_medicion','area','valores_factor']
+        fields = ['indicador','contenido','valor_medicion','institucion','area','valores_factor', ]
     
+
+class IndicadorGrafico(serializers.ModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
+    factores_desagregacion = serializers.SlugRelatedField(slug_field='nombre', many=True, read_only=True)
+    class Meta:
+        model = Indicador
+        fields = ['pk','nombre','factores_desagregacion']

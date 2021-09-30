@@ -61,4 +61,6 @@ urlpatterns = [
     path("medicion/detalle/<int:pk>", MedicionIndicadorDetail.as_view(), name="medicion-detalle"),
     #Grafica API
     path("grafica/<int:indicador>", GraficaV.as_view(), name="grafica"),
+    #Indicador Grafica
+    path("grafica/", IndicadorG.as_view(), name="indicador-grafica"),
 ]# + router.urls

@@ -44,6 +44,16 @@ class GraficaV(generics.ListCreateAPIView):
         return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
 
 
+class IndicadorG(generics.ListCreateAPIView):
+    serializer_class = H_IndicadorSerializer
+    def get_queryset(self):
+        indicadores = Indicador.objects.all().filter(mostrar=True)
+        indicadores = indicadores.annotate(
+            num_desagregacion = Count('mediciones__valores_factor')
+        ).filter(num_desagregacion__gt=0)
+        return indicadores
+
+
 #Listas API
 class EjeList(generics.ListCreateAPIView):
     queryset = Eje.objects.all()
