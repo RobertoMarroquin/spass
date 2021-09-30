@@ -45,7 +45,7 @@ class GraficaV(generics.ListCreateAPIView):
 
 
 class IndicadorG(generics.ListCreateAPIView):
-    serializer_class = H_IndicadorSerializer
+    serializer_class = IndicadorGrafico
     def get_queryset(self):
         indicadores = Indicador.objects.all().filter(mostrar=True)
         indicadores = indicadores.annotate(
