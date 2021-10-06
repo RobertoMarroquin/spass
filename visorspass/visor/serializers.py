@@ -1,3 +1,5 @@
+# Django
+from django.urls.base import reverse_lazy
 # Rest-Framework
 from rest_framework import serializers
 from rest_framework.filters import SearchFilter
@@ -149,10 +151,25 @@ class H_IndicadorSerializer(serializers.HyperlinkedModelSerializer):
     fuentes_informacion = H_FuenteInformacionSerializer(many=True, read_only=True)
     variable = H_VariableSerializer(many=False, read_only=True)
     factores_desagregacion = H_FactorDesagregacionSerializer(many=True, read_only=True)
-
+    archivo = serializers.SerializerMethodField('get_archivo')
+    alcance = serializers.SerializerMethodField('get_alcance')
+    periodicidad = serializers.SerializerMethodField('get_periodicidad')
     class Meta:
         model = Indicador
         fields = '__all__'
+
+    def get_archivo(self,indicador):
+        if indicador.archivo:
+            archivo = reverse_lazy("visor:archivo",kwargs={"indicador":indicador.id,}) 
+        else:
+            archivo = ""
+        return archivo
+    
+    def get_periodicidad(self,indicador):
+        return indicador.get_periodicidad_display()
+
+    def get_alcance(self,indicador):
+        return indicador.get_alcance_display()
 
 
 class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):

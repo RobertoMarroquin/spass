@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.db.models import Count
+from django.views.generic import View
+from django.http.response import FileResponse
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -52,6 +54,14 @@ class IndicadorG(generics.ListCreateAPIView):
             num_desagregacion = Count('mediciones__valores_factor')
         ).filter(num_desagregacion__gt=0)
         return indicadores
+
+
+class ArchivoIndicadorView(View):
+    def get(self, request, *args, **kwargs):
+        indicador = Indicador.objects.get(id=self.kwargs['indicador'])
+        # create the HttpResponse object ...
+        response = FileResponse(open(indicador.archivo.path, 'rb'))
+        return response
 
 
 #Listas API
@@ -195,6 +205,7 @@ class VariableDetail(generics.RetrieveDestroyAPIView):
 class IndicadorDetail(generics.RetrieveDestroyAPIView):
     queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
+
 
 class MedicionIndicadorDetail(generics.RetrieveDestroyAPIView):
     queryset = MedicionIndicador.objects.all()

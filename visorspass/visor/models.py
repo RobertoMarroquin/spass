@@ -1,5 +1,8 @@
 from django.db import models
 
+from visorspass.settings import BASE_DIR
+
+
 # Create your models here.
 class Eje(models.Model):
     codigo = models.CharField("Codigo", max_length=50,blank=True, null=True)
@@ -46,6 +49,7 @@ class Indicador(models.Model):
     instituciones = models.ManyToManyField('visor.Institucion', related_name='indicadores',blank=True)
     usa_area = models.BooleanField(("Usa Area"), default=False)
     mostrar = models.BooleanField("Mostrar indicador", default=False)
+    archivo = models.FileField(("Archivo"), upload_to='mediciones/', max_length=250,blank=True, null=True)
 
     class Meta:
         verbose_name = ("Indicador")

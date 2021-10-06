@@ -14,6 +14,8 @@ from rest_framework.routers import DefaultRouter
 
 app_name = 'visor'
 urlpatterns = [
+    #Descarga Archivo Indicador
+    path("archivo/indicador/<int:indicador>", ArchivoIndicadorView.as_view(), name="archivo"),
     path("indicadores/", indicadores_list, name="indicadores_list"), 
     path("indicador/<int:pk>", indicador_detail, name="indicadores_detail"),
     #API Root
