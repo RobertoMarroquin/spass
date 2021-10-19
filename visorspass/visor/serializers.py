@@ -218,7 +218,7 @@ class GraficaSerializer(serializers.ModelSerializer):
     institucion = serializers.SlugRelatedField(slug_field='codigo',read_only=True)
     class Meta:
         model = MedicionIndicador
-        fields = ['indicador','contenido','valor_medicion','institucion','area','valores_factor', ]
+        fields = ['indicador','contenido','valor_medicion','institucion','area','valores_factor', 'fecha']
     
 
 class FactorDesagregacionSerializer(serializers.ModelSerializer):
