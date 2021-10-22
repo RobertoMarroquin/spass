@@ -177,7 +177,7 @@ class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
     valores_factor = H_ValorFactorSerializer(many=True, read_only=True)
     area = H_AreaSerializer(many=False, read_only=True)
     institucion = serializers.HyperlinkedRelatedField(view_name="visor:institucion-detalle",read_only=True)
-    fecha = serializers.SerializerMethodField('get_ano')
+    #fecha = serializers.SerializerMethodField('get_ano')
 
     class Meta:
         model = MedicionIndicador
@@ -190,6 +190,7 @@ class H_MedicionSerializer(serializers.HyperlinkedModelSerializer):
             'valor_etario_inicial',
             'valor_etario_final',
             'fecha',
+            'ano',
             "indicador",
             "valores_factor",
             "area",
@@ -235,10 +236,17 @@ class IndicadorGrafico(serializers.ModelSerializer):
         fields = ['pk','nombre','factores_desagregacion']
 
 
+class IndicadorSerie(serializers.ModelSerializer):
+    class Meta:
+        model = Indicador
+        fields = ['id','nombre']
+
+
 class ResultadoSerializer2(serializers.ModelSerializer):
+    indicadores = IndicadorSerie(many=True, read_only=True)
     class Meta:
         model = Resultado
-        fields = ("id","codigo","resultado","presupuesto")
+        fields = ("id","codigo","resultado","presupuesto",'indicadores')
 
 
 class EjeSerializer2(serializers.ModelSerializer):
