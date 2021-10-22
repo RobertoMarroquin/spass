@@ -22,7 +22,7 @@ class Resultado(models.Model):
     codigo = models.CharField(("Codigo"), max_length=50, blank=True, null=True)
     resultado = models.TextField("Resultado", blank=True, null=True)
     presupuesto = models.TextField("Presupuesto", blank=True, null=True)
-    eje = models.ForeignKey("visor.Eje", on_delete=models.CASCADE, blank=True, null=True)
+    eje = models.ForeignKey("visor.Eje", on_delete=models.CASCADE, blank=True, null=True, related_name="resultados")
     
     class Meta:
         verbose_name = ("Resultado")

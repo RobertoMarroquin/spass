@@ -149,7 +149,7 @@ class MedicionIndicadorList(generics.ListCreateAPIView):
 #Detalles API
 class EjeDetail(generics.RetrieveDestroyAPIView):
     queryset = Eje.objects.all()
-    serializer_class = H_EjeSerializer
+    serializer_class = EjeSerializer2
 
 
 class InstitucionDetail(generics.RetrieveDestroyAPIView):

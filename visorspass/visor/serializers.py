@@ -32,11 +32,9 @@ class DepartamentoSerializer(serializers.ModelSerializer):
 
 
 class ResultadoSerializer(serializers.ModelSerializer):
-    eje = EjeSerializer(many=False, read_only=True, required=False)
-    eje_codigo = serializers.ReadOnlyField(source='eje.codigo')
     class Meta:
         model = Resultado
-        fields = '__all__'
+        fields = ("codigo","resultado","presupuesto")
 
 
 #Hyperlinkedmodelserilizers
@@ -235,3 +233,16 @@ class IndicadorGrafico(serializers.ModelSerializer):
     class Meta:
         model = Indicador
         fields = ['pk','nombre','factores_desagregacion']
+
+
+class ResultadoSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = Resultado
+        fields = ("id","codigo","resultado","presupuesto")
+
+
+class EjeSerializer2(serializers.ModelSerializer):
+    resultados = ResultadoSerializer2(many=True,read_only=True)
+    class Meta:
+        model = Eje
+        fields = '__all__'
