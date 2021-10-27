@@ -239,6 +239,7 @@ class IndicadorGrafico(serializers.ModelSerializer):
 class IndicadorSerie(serializers.ModelSerializer):
     code = serializers.SerializerMethodField("get_code")
     label = serializers.SerializerMethodField("get_name")
+    url = serializers.SerializerMethodField("get_url")
 
     class Meta:
         model = Indicador
@@ -249,6 +250,9 @@ class IndicadorSerie(serializers.ModelSerializer):
 
     def get_name(self,indicador):
         return indicador.nombre
+
+    def get_url(self,indicador):
+        return f"/ficha/?pk={indicador.id}"
 
 
 class ResultadoSerializer2(serializers.ModelSerializer):
