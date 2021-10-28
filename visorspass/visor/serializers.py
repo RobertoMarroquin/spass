@@ -276,7 +276,7 @@ class IndicadorSerie(serializers.ModelSerializer):
     def get_url(self,indicador):
         return f"/ficha/?pk={indicador.id}"
     
-    def get_url(self,indicador):
+    def get_resultado(self,indicador):
         return indicador.resultado.id
 
 
