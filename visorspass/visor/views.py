@@ -45,6 +45,12 @@ class GraficaV(generics.ListCreateAPIView):
             indicador = None
         return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
 
+class IndicadorSelect(generics.ListCreateAPIView):
+    serializer_class = IndicadorSerie
+    def get_queryset(self):
+        indicadores = Indicador.objects.all().filter(mostrar=True)
+        return indicadores
+
 
 class IndicadorG(generics.ListCreateAPIView):
     serializer_class = IndicadorGrafico

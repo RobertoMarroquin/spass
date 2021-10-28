@@ -154,7 +154,27 @@ class H_IndicadorSerializer(serializers.HyperlinkedModelSerializer):
     periodicidad = serializers.SerializerMethodField('get_periodicidad')
     class Meta:
         model = Indicador
-        fields = '__all__'
+        fields = [
+            "pk",
+            "url",
+            "resultado",
+            "codigo",
+            "nombre",
+            "alcance",
+            "periodicidad",
+            "fuente_verificacion",
+            "notas",
+            "informacion_requerida",
+            "formula",
+            "instituciones",
+            "resultado",
+            "fuentes_informacion",
+            "variable",
+            "factores_desagregacion",
+            "archivo",
+            "alcance",
+            "periodicidad",
+        ]
 
     def get_archivo(self,indicador):
         if indicador.archivo:

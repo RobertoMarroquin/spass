@@ -49,7 +49,8 @@ class Indicador(models.Model):
     instituciones = models.ManyToManyField('visor.Institucion', related_name='indicadores',blank=True)
     usa_area = models.BooleanField(("Usa Area"), default=False)
     mostrar = models.BooleanField("Mostrar indicador", default=False)
-    archivo = models.FileField(("Archivo"), upload_to='mediciones/', max_length=250,blank=True, null=True)
+    archivo = models.FileField(("Archivo Ficha"), upload_to='documentos/', max_length=250,blank=True, null=True)
+    documentos = models.ManyToManyField("visor.Documento", related_name=("indicadores"), blank=True)
 
     class Meta:
         verbose_name = ("Indicador")
@@ -192,4 +193,16 @@ class FuenteInformacion(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+class Documento(models.Model):
+    nombre = models.CharField('Nombre', max_length=150, blank=True, null=True)
+    documento = models.FileField(upload_to='documentos/', blank=True, null=True)
+    
+    class Meta:
+        verbose_name = 'Documentos'
+        verbose_name_plural = 'Documentoss'
+
+    def __str__(self):
+        return f'{self.nombre}'
 

@@ -63,6 +63,7 @@ class IndicadorAdmin(admin.ModelAdmin):
         "factores_desagregacion",
         "fuentes_informacion",
         "instituciones",
+        'documentos',
         ]
     ordering = ('nombre',)
     
@@ -183,5 +184,14 @@ class FuenteInformacionAdmin(admin.ModelAdmin):
     list_display = (
         "nombre",
         "codigo",
+    )
+    search_fields = list_display
+
+
+@admin.register(Documento)
+class DocumentoAdmin(admin.ModelAdmin):
+    list_display = (
+        "nombre",
+        "documento",
     )
     search_fields = list_display

@@ -65,4 +65,6 @@ urlpatterns = [
     path("grafica/<int:indicador>", GraficaV.as_view(), name="grafica"),
     #Indicador Grafica
     path("grafica/", IndicadorG.as_view(), name="indicador-grafica"),
+    #Indicador Select
+    path("indicadores/select", IndicadorSelect.as_view(), name="indicador-select"),
 ]# + router.urls
