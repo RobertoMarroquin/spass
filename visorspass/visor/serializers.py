@@ -264,7 +264,7 @@ class IndicadorSerie(serializers.ModelSerializer):
 
     class Meta:
         model = Indicador
-        fields = ['code','label','url']
+        fields = ['code','label','url','name']
 
     def get_code(self,indicador):
         return indicador.id
