@@ -45,6 +45,12 @@ class GraficaV(generics.ListCreateAPIView):
             indicador = None
         return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
 
+#detalle de Resultados para uso en recomendaciones de Ficha
+class ResultadoRecomendacion(generics.RetrieveDestroyAPIView):
+    queryset = Resultado.objects.all()
+    serializer_class = ResultadoSerializer2
+
+#Lista de indicadores para uso de cualquier barra de busqueda
 class IndicadorSelect(generics.ListCreateAPIView):
     serializer_class = IndicadorSerie
     def get_queryset(self):

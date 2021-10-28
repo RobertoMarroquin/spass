@@ -67,4 +67,6 @@ urlpatterns = [
     path("grafica/", IndicadorG.as_view(), name="indicador-grafica"),
     #Indicador Select
     path("indicadores/select", IndicadorSelect.as_view(), name="indicador-select"),
+    #Resultado Recomendacion
+    path("resultado/recomendacion/<int:pk>", ResultadoRecomendacion.as_view(), name="resultado-recomendacion"),
 ]# + router.urls

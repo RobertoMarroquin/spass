@@ -33,7 +33,6 @@ class Resultado(models.Model):
 
 
 class Indicador(models.Model):
-    resultado = models.ForeignKey("visor.Resultado", on_delete=models.CASCADE,related_name='indicadores')
     codigo = models.CharField('Codigo', max_length=50, blank=True, null=True)
     nombre = models.CharField('Nombre', max_length=150, blank=True, null=True)
     alcance = models.IntegerField(("Alcance"), choices=((1,"Corto"),(2,"Medio"),(3,"Largo")), blank=True, null=True)
@@ -43,6 +42,7 @@ class Indicador(models.Model):
     informacion_requerida = models.TextField(("Informacion a Requerir"), blank=True, null=True)
     formula = models.TextField(("Formula"),blank=True, null=True)
     
+    resultado = models.ForeignKey("visor.Resultado", on_delete=models.CASCADE,related_name='indicadores')
     variable = models.ForeignKey('visor.Variable', related_name='indicador', on_delete=models.CASCADE,blank=True, null=True)
     factores_desagregacion = models.ManyToManyField('visor.FactorDesagregacion', related_name='indicadores',blank=True)
     fuentes_informacion = models.ManyToManyField('visor.FuenteInformacion', related_name='indicadores',blank=True)
