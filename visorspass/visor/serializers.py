@@ -260,6 +260,7 @@ class IndicadorSerie(serializers.ModelSerializer):
     code = serializers.SerializerMethodField("get_code")
     label = serializers.SerializerMethodField("get_name")
     url = serializers.SerializerMethodField("get_url")
+    name = serializers.SerializerMethodField("get_name")
 
     class Meta:
         model = Indicador
