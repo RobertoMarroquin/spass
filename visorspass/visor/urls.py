@@ -16,8 +16,10 @@ app_name = 'visor'
 urlpatterns = [
     #Descarga Archivo Indicador
     path("archivo/indicador/<int:indicador>", ArchivoIndicadorView.as_view(), name="archivo"),
-    path("indicadores/", indicadores_list, name="indicadores_list"), 
-    path("indicador/<int:pk>", indicador_detail, name="indicadores_detail"),
+    #Descargas documentos
+    path("descarga/", IndicadorDescargaView.as_view(), name="indicador-descarga"),
+    path("descarga/<int:indicador>", DocumentoDescargaView.as_view(), name="documento-descarga"),
+    path("descarga/documento/<int:documento>", DocumentoView.as_view(), name="documento"),
     #API Root
     path("api/", api_root, name="api_root"),
     #Eje API
@@ -69,4 +71,5 @@ urlpatterns = [
     path("indicadores/select", IndicadorSelect.as_view(), name="indicador-select"),
     #Resultado Recomendacion
     path("resultado/recomendacion/<int:pk>", ResultadoRecomendacion.as_view(), name="resultado-recomendacion"),
+    
 ]# + router.urls

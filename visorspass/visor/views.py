@@ -34,6 +34,31 @@ def api_root(request, format=None, **kwargs):
         #'grafica': reverse('visor:grafica',request=request,format=format),
 
     })
+#Descargas
+class IndicadorDescargaView(generics.ListCreateAPIView):
+    serializer_class = IndicadorDescarga
+    def get_queryset(self):
+        indicadores = Indicador.objects.all().filter(mostrar=True)
+        return indicadores
+
+
+class DocumentoDescargaView(generics.ListCreateAPIView):
+    serializer_class = DocumentoSerializer
+    def get_queryset(self):
+        if 'indicador' in self.kwargs:
+            indicador = self.kwargs['indicador']
+        else:
+            indicador = None
+        documentos = Indicador.objects.get(id=indicador).documentos
+        return documentos
+
+
+class DocumentoView(View):
+    def get(self, request, *args, **kwargs):
+        documento = Documento.objects.get(id=self.kwargs['documento'])
+        # create the HttpResponse object ...
+        response = FileResponse(open(documento.documento.path, 'rb'))
+        return response
 
 #Grafica
 class GraficaV(generics.ListCreateAPIView):

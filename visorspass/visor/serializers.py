@@ -292,3 +292,34 @@ class EjeSerializer2(serializers.ModelSerializer):
     class Meta:
         model = Eje
         fields = '__all__'
+
+
+class DocumentoSerializer(serializers.ModelSerializer):
+    url =  serializers.SerializerMethodField("get_archivo")
+    class Meta:
+        model = Documento
+        fields = '__all__'
+
+    def get_archivo(self,documento):
+        archivo = reverse_lazy("visor:documento",kwargs={"documento":documento.id,}) 
+        return archivo
+
+
+class IndicadorDescarga(serializers.ModelSerializer):
+    code = serializers.SerializerMethodField("get_code")
+    url = serializers.SerializerMethodField("get_url")
+    name = serializers.SerializerMethodField("get_name")
+    
+    class Meta:
+        model = Indicador
+        fields = ['code','url','name']
+
+    def get_code(self,indicador):
+        return indicador.id
+
+    def get_name(self,indicador):
+        return indicador.nombre
+
+    def get_url(self,indicador):
+        return f"/descarga/?pk={indicador.id}"
+    

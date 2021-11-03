@@ -198,7 +198,7 @@ class FuenteInformacion(models.Model):
 class Documento(models.Model):
     nombre = models.CharField('Nombre', max_length=150, blank=True, null=True)
     documento = models.FileField(upload_to='documentos/', blank=True, null=True)
-    
+    descripcion = models.CharField('Descripcion',max_length=300)
     class Meta:
         verbose_name = 'Documentos'
         verbose_name_plural = 'Documentoss'
