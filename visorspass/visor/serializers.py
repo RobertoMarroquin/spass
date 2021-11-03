@@ -305,6 +305,17 @@ class DocumentoSerializer(serializers.ModelSerializer):
         return archivo
 
 
+class IndicadorDocumentoSerializer(serializers.ModelSerializer):
+    documentos =  DocumentoSerializer(many=True, read_only=True)
+    class Meta:
+        model = Documento
+        fields = '__all__'
+
+    def get_archivo(self,documento):
+        archivo = reverse_lazy("visor:documento",kwargs={"documento":documento.id,}) 
+        return archivo
+
+
 class IndicadorDescarga(serializers.ModelSerializer):
     code = serializers.SerializerMethodField("get_code")
     url = serializers.SerializerMethodField("get_url")
