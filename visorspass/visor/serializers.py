@@ -309,7 +309,7 @@ class IndicadorDocumentoSerializer(serializers.ModelSerializer):
     documentos =  DocumentoSerializer(many=True, read_only=True)
     class Meta:
         model = Indicador
-        fields = '__all__'
+        fields = ['documentos','nombre']
 
 
 class IndicadorDescarga(serializers.ModelSerializer):

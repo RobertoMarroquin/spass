@@ -42,15 +42,9 @@ class IndicadorDescargaView(generics.ListCreateAPIView):
         return indicadores
 
 
-class DocumentoDescargaView(generics.ListCreateAPIView):
+class DocumentoDescargaView(generics.RetrieveDestroyAPIView):
     serializer_class = IndicadorDocumentoSerializer
-    def get_queryset(self):
-        if 'indicador' in self.kwargs:
-            indicador = self.kwargs['indicador']
-        else:
-            indicador = None
-        documentos = Indicador.objects.get(id=indicador).documentos
-        return documentos
+    queryset = Indicador.objects.all()
 
 
 class DocumentoView(View):

@@ -18,7 +18,7 @@ urlpatterns = [
     path("archivo/indicador/<int:indicador>", ArchivoIndicadorView.as_view(), name="archivo"),
     #Descargas documentos
     path("descarga/", IndicadorDescargaView.as_view(), name="indicador-descarga"),
-    path("descarga/<int:indicador>", DocumentoDescargaView.as_view(), name="documento-descarga"),
+    path("descarga/<int:pk>", DocumentoDescargaView.as_view(), name="documento-descarga"),
     path("descarga/documento/<int:documento>", DocumentoView.as_view(), name="documento"),
     #API Root
     path("api/", api_root, name="api_root"),
