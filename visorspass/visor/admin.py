@@ -170,8 +170,8 @@ class MedicionIndicadorAdmin(admin.ModelAdmin):
         'indicador',
         'fecha',
         'valor_medicion',
-        'valor_etario_inicial',
-        'valor_etario_final',
+        #'valor_etario_inicial',
+        #'valor_etario_final',
         'area',
     )
     autocomplete_fields = ['indicador','area']
