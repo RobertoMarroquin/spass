@@ -274,7 +274,7 @@ class IndicadorSerie(serializers.ModelSerializer):
         return indicador.nombre
 
     def get_url(self,indicador):
-        return f"/ficha/{indicador.id}"
+        return f"/#/ficha/{indicador.id}"
     
     def get_resultado(self,indicador):
         return indicador.resultado.id
@@ -328,5 +328,4 @@ class IndicadorDescarga(serializers.ModelSerializer):
         return indicador.nombre
 
     def get_url(self,indicador):
-        return f"/descarga/{indicador.id}"
-    
+        return f"/#/descarga/{indicador.id}"
