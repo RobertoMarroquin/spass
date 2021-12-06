@@ -34,7 +34,7 @@ class Resultado(models.Model):
 
 class Indicador(models.Model):
     codigo = models.CharField('Codigo', max_length=50, blank=True, null=True)
-    nombre = models.CharField('Nombre', max_length=150, blank=True, null=True)
+    nombre = models.CharField('Nombre', max_length=500, blank=True, null=True)
     alcance = models.IntegerField(("Alcance"), choices=((1,"Corto"),(2,"Medio"),(3,"Largo")), blank=True, null=True)
     periodicidad = models.IntegerField(("Periodicidad de medicion"), choices=((1,"Anual"),(2,"Semestral"),(3,'Cuatrimestral'),(4,"Trimestral"),(5,'Mensual')), blank=True, null=True)
     fuente_verificacion = models.TextField(("Fuente de Verificacion"), blank=True, null=True)
