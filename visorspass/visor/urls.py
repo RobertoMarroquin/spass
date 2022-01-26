@@ -14,6 +14,8 @@ from rest_framework.routers import DefaultRouter
 
 app_name = 'visor'
 urlpatterns = [
+    #Select de mapa
+    path("/mapa/", SelectMapa.as_view(), name="selectMapa"),
     #Descarga Archivo Indicador
     path("archivo/indicador/<int:indicador>", ArchivoIndicadorView.as_view(), name="archivo"),
     #Descargas documentos

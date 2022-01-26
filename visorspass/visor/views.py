@@ -34,6 +34,13 @@ def api_root(request, format=None, **kwargs):
         #'grafica': reverse('visor:grafica',request=request,format=format),
 
     })
+#Devuelve conjunto de indicadores que usan area
+class SelectMapa(generics.ListCreateAPIView):
+    serializer_class = IndicadorDescarga
+    def get_queryset(self):
+        indicadores = Indicador.objects.all().filter(mostrar=True,usa_area=True)
+        return indicadores
+
 #Descargas
 class IndicadorDescargaView(generics.ListCreateAPIView):
     serializer_class = IndicadorDescarga

@@ -6,7 +6,6 @@ from rest_framework.filters import SearchFilter
 from rest_framework.relations import ManyRelatedField, PrimaryKeyRelatedField
 # Self
 from .models import *
-
 class EjeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Eje
@@ -329,3 +328,4 @@ class IndicadorDescarga(serializers.ModelSerializer):
 
     def get_url(self,indicador):
         return f"/#/descarga/{indicador.id}"
+
