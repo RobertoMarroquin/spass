@@ -195,3 +195,12 @@ class DocumentoAdmin(admin.ModelAdmin):
         "documento",
     )
     search_fields = list_display
+    
+    
+@admin.register(ReporteAnual)
+class ReporteAnualAdmin(admin.ModelAdmin):
+    list_display = (
+        "nombre",
+        "archivo",
+    )
+    search_fields = list_display

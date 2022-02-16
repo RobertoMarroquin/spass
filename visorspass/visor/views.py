@@ -34,6 +34,19 @@ def api_root(request, format=None, **kwargs):
         #'grafica': reverse('visor:grafica',request=request,format=format),
 
     })
+    
+#Descarga de Reportes Anuales
+class ReporteAnualListView(generics.ListAPIView):
+    serializer_class = ReporteAnualSerializer
+    queryset = ReporteAnual.objects.all()
+
+class ReporteAnualDownloadView(View):
+    def get(self, request, *args, **kwargs):
+        documento = ReporteAnual.objects.get(id=self.kwargs['reporte'])
+        # create the HttpResponse object ...
+        response = FileResponse(open(documento.archivo.path, 'rb'))
+        return response
+
 #Devuelve conjunto de indicadores que usan area
 class SelectMapa(generics.ListCreateAPIView):
     serializer_class = IndicadorDescarga

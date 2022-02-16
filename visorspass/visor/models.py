@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 from visorspass.settings import BASE_DIR
@@ -206,3 +207,15 @@ class Documento(models.Model):
     def __str__(self):
         return f'{self.nombre}'
 
+
+class ReporteAnual(models.Model):
+    nombre = models.CharField('Nombre', max_length=150, blank=False, null=False)
+    archivo = models.FileField(upload_to='documentos/', blank=False, null=False)
+    anyo = models.IntegerField(("Año"),blank=False, null=False)
+    descripcion = models.TextField('Descripcion')
+    class Meta:
+        verbose_name = 'Reporte Anual'
+        verbose_name_plural = 'Reportes Anuales'
+    def __str__(self):
+        return f'{self.nombre}'
+    

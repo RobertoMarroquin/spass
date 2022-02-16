@@ -315,6 +315,7 @@ class IndicadorDescarga(serializers.ModelSerializer):
     code = serializers.SerializerMethodField("get_code")
     url = serializers.SerializerMethodField("get_url")
     name = serializers.SerializerMethodField("get_name")
+    extencion = serializers.SerializerMethodField("get_extencion")
     
     class Meta:
         model = Indicador
@@ -328,4 +329,17 @@ class IndicadorDescarga(serializers.ModelSerializer):
 
     def get_url(self,indicador):
         return f"/#/descarga/{indicador.id}"
+    
+    def get_extencion(self,indicador):
+        return indicador.documento.path().split('.')[-1]
 
+
+class ReporteAnualSerializer(serializers.ModelSerializer):
+    archivo = serializers.SerializerMethodField("get_archivo")
+    class Meta:
+        model = ReporteAnual
+        fields = '__all__'
+        
+    def get_archivo(self,reporte):
+        archivo = reverse_lazy("visor:reporte",kwargs={"reporte":reporte.id,})
+        return archivo
