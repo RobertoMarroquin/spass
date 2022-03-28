@@ -43,7 +43,10 @@ class IndicadorRelacionadosList(generics.ListAPIView):
     def get_queryset(self):
         indicador_id = self.kwargs['indicador']
         indicador = Indicador.objects.get(id=indicador_id)
-        queryset = Indicador.objects.filter(Q(id=indicador_id)|Q(indicador_general=indicador_id)|Q(indicador_general=indicador.indicador_general.id)|Q(id=indicador.indicador_general.id))
+        if indicador.indicador_general:
+            queryset = Indicador.objects.filter(Q(id=indicador_id)|Q(indicador_general=indicador_id)|Q(indicador_general=indicador.indicador_general.id)|Q(id=indicador.indicador_general.id))
+        else :
+            queryset = Indicador.objects.filter(Q(id=indicador_id)|Q(indicador_general=indicador_id))
         return queryset
     
 #Descarga de Reportes Anuales
