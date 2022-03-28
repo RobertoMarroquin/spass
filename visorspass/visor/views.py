@@ -41,8 +41,9 @@ def api_root(request, format=None, **kwargs):
 class IndicadorRelacionadosList(generics.ListAPIView):
     serializer_class = IndicadorSerie
     def get_queryset(self):
-        indicador_id = self.kwargs['indicador']   
-        queryset = Indicador.objects.filter(Q(id=indicador_id)|Q(indicador_general=indicador_id))
+        indicador_id = self.kwargs['indicador']
+        indicador = Indicador.objects.get(id=indicador_id)
+        queryset = Indicador.objects.filter(Q(id=indicador_id)|Q(indicador_general=indicador_id)|Q(indicador_general=indicador.indicador_general)|Q(indicador_id=indicador.indicador_general))
         return queryset
     
 #Descarga de Reportes Anuales
