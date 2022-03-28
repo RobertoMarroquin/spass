@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.db.models import Count
 from django.views.generic import View
 from django.http.response import FileResponse
+from django.db.models import Q
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -34,6 +35,15 @@ def api_root(request, format=None, **kwargs):
         #'grafica': reverse('visor:grafica',request=request,format=format),
 
     })
+
+#Vistas de Django Rest Framework
+#Lista de Indicadores relacionados
+class IndicadorRelacionadosList(generics.ListAPIView):
+    serializer_class = IndicadorSerie
+    def get_queryset(self):
+        indicador_id = self.kwargs['indicador']   
+        queryset = Indicador.objects.filter(Q(id=indicador_id)|Q(indicador_general=indicador_id))
+        return queryset
     
 #Descarga de Reportes Anuales
 class ReporteAnualListView(generics.ListAPIView):

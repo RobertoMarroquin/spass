@@ -52,7 +52,7 @@ class Indicador(models.Model):
     mostrar = models.BooleanField("Mostrar indicador", default=False)
     archivo = models.FileField(("Archivo Ficha"), upload_to='documentos/', max_length=250,blank=True, null=True)
     documentos = models.ManyToManyField("visor.Documento", related_name=("indicadores"), blank=True)
-
+    indicador_general = models.ForeignKey('visor.Indicador', on_delete=models.CASCADE, related_name='subindicadores', blank=True, null=True)
     class Meta:
         verbose_name = ("Indicador")
         verbose_name_plural = ("Indicadores")

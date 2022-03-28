@@ -4,16 +4,10 @@ from .views import *
 
 from rest_framework.routers import DefaultRouter
 
-#router = DefaultRouter()
-#router.register('ejes', EjeViewSet, basename='ejes')
-#router.register('instituciones', InstitucionViewSet, basename='instituciones')
-#router.register('fuenteInformaciones', FuenteInformacionViewSet, basename='fuenteInformaciones')
-#router.register('departamentos', DepartamentoViewSet, basename='departamentos')
-#router.register('factorDesagregaciones', FactorDesagregacionViewSet, basename='factorDesagregaciones')
-#router.register('resultados', ResultadoViewSet, basename='resultados')
-
 app_name = 'visor'
 urlpatterns = [
+    #Indicadores relacionados con subindicadores
+    path('indicadores_relacionados/<int:indicador>', IndicadorRelacionadosList.as_view(), name='indicadores_relacionados'),
     #Descarga de Reporte anual
     path("reporte_anual/lista", ReporteAnualListView.as_view(), name="reportes"),
     path("reporte_anual/descarga/<int:reporte>", ReporteAnualDownloadView.as_view(), name="reporte"),
@@ -77,4 +71,4 @@ urlpatterns = [
     #Resultado Recomendacion
     path("resultado/recomendacion/<int:pk>", ResultadoRecomendacion.as_view(), name="resultado-recomendacion"),
     
-]# + router.urls
+]
