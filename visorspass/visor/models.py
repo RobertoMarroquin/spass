@@ -42,7 +42,7 @@ class Indicador(models.Model):
     notas = models.TextField(("Notas Tecnicas"), blank=True, null=True)
     informacion_requerida = models.TextField(("Informacion a Requerir"), blank=True, null=True)
     formula = models.TextField(("Formula"),blank=True, null=True)
-    
+    subtitulo = models.CharField(("Subtitulo"),max_length=350, blank=True, null=True,default="")
     resultado = models.ForeignKey("visor.Resultado", on_delete=models.CASCADE,related_name='indicadores')
     variable = models.ForeignKey('visor.Variable', related_name='indicador', on_delete=models.CASCADE,blank=True, null=True)
     factores_desagregacion = models.ManyToManyField('visor.FactorDesagregacion', related_name='indicadores',blank=True)

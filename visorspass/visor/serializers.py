@@ -160,6 +160,7 @@ class H_IndicadorSerializer(serializers.HyperlinkedModelSerializer):
             "resultado",
             "codigo",
             "nombre",
+            "subtitulo",
             "alcance",
             "periodicidad",
             "fuente_verificacion",
