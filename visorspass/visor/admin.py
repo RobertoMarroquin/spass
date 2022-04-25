@@ -46,7 +46,7 @@ class VariableInline(admin.StackedInline):
 
 @admin.register(Indicador)
 class IndicadorAdmin(admin.ModelAdmin):
-    autocomplete_fields = ('resultado','indicador_general')
+    autocomplete_fields = ('resultado','indicador_general','variable','resultado')
     list_display = (
         "nombre",
         "codigo",
@@ -57,7 +57,6 @@ class IndicadorAdmin(admin.ModelAdmin):
         'variable',
     )
     search_fields = list_display[:5]+('variable__nombre',)
-    autocomplete_fields = ['variable','resultado']
     list_filter = ['alcance',]
     filter_horizontal = [
         "factores_desagregacion",
