@@ -275,7 +275,7 @@ class IndicadorSerie(serializers.ModelSerializer):
         es_subindicador = False
         if indicador.codigo.count('.') > 3:
             es_subindicador = True
-        return f' ⤷ {indicador.codigo} - {indicador.nombre}' if es_subindicador else f'{indicador.codigo} - {indicador.nombre}'
+        return f'{indicador.codigo} - {indicador.nombre}' if es_subindicador else f'{indicador.codigo} - {indicador.nombre}'
 
     def get_url(self,indicador):
         return f"/#/ficha/{indicador.id}"
