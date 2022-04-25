@@ -166,16 +166,16 @@ class MedicionIndicadorAdmin(admin.ModelAdmin):
     list_display = (
         'codigo',
         'contenido',
-        'indicador',
         'fecha',
         'valor_medicion',
+        'indicador',
         #'valor_etario_inicial',
         #'valor_etario_final',
         'area',
     )
     autocomplete_fields = ['indicador','area']
     filter_horizontal = ['valores_factor']
-    search_fields = list_display[:6]
+    search_fields = list_display[:3]+["indicador__nombre",]
 
 
 @admin.register(FuenteInformacion)
