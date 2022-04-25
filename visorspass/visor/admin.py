@@ -46,7 +46,7 @@ class VariableInline(admin.StackedInline):
 
 @admin.register(Indicador)
 class IndicadorAdmin(admin.ModelAdmin):
-    autocomplete_fields = ('resultado',)
+    autocomplete_fields = ('resultado','indicador_general')
     list_display = (
         "nombre",
         "codigo",
@@ -65,7 +65,7 @@ class IndicadorAdmin(admin.ModelAdmin):
         "instituciones",
         'documentos',
         ]
-    ordering = ('nombre',)
+    ordering = ('codigo','nombre',)
     
 
 @admin.register(Institucion)
