@@ -175,7 +175,7 @@ class MedicionIndicadorAdmin(admin.ModelAdmin):
     )
     autocomplete_fields = ['indicador','area']
     filter_horizontal = ['valores_factor']
-    search_fields = list_display[:3]+["indicador__nombre",]
+    search_fields = list_display[:3]+("indicador__nombre",)
 
 
 @admin.register(FuenteInformacion)
