@@ -171,10 +171,12 @@ class MedicionIndicadorAdmin(admin.ModelAdmin):
         'contenido',
         'fecha',
         'area',
+        "indicador__nombre",
     )
     autocomplete_fields = ['indicador','area']
     filter_horizontal = ['valores_factor']
-    search_fields = list_display[:3]+("indicador__nombre",)
+    search_fields = list_display[:5]+("indicador__nombre",)
+    list_filter = ['ano','indicador']
     list_editable = [
         'ano',
         'valor_medicion',
