@@ -171,7 +171,7 @@ class MedicionIndicadorAdmin(admin.ModelAdmin):
         'contenido',
         'fecha',
         'area',
-        "indicador__nombre",
+        'indicador__nombre',
     )
     autocomplete_fields = ['indicador','area']
     filter_horizontal = ['valores_factor']
