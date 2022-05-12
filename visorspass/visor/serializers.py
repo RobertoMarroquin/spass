@@ -282,6 +282,30 @@ class IndicadorSerie(serializers.ModelSerializer):
     
     def get_resultado(self,indicador):
         return indicador.resultado.id
+    
+
+class IndicadorRelacionado(serializers.ModelSerializer):
+    code = serializers.SerializerMethodField("get_code")
+    label = serializers.SerializerMethodField("get_name")
+    url = serializers.SerializerMethodField("get_url")
+    name = serializers.SerializerMethodField("get_name")
+    resultado = serializers.SerializerMethodField("get_resultado")
+
+    class Meta:
+        model = Indicador
+        fields = ['code','label','url','name',"resultado"]
+
+    def get_code(self,indicador):
+        return indicador.id
+
+    def get_name(self,indicador):
+       return f'{indicador.codigo} - {indicador.subtitulo}'
+
+    def get_url(self,indicador):
+        return f"/#/ficha/{indicador.id}"
+    
+    def get_resultado(self,indicador):
+        return indicador.resultado.id
 
 
 class ResultadoSerializer2(serializers.ModelSerializer):

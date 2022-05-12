@@ -39,7 +39,7 @@ def api_root(request, format=None, **kwargs):
 #Vistas de Django Rest Framework
 #Lista de Indicadores relacionados
 class IndicadorRelacionadosList(generics.ListAPIView):
-    serializer_class = IndicadorSerie
+    serializer_class = IndicadorRelacionado
     def get_queryset(self):
         indicador_id = self.kwargs['indicador']
         indicador = Indicador.objects.get(id=indicador_id)
