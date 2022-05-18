@@ -106,9 +106,8 @@ class ResultadoRecomendacion(generics.RetrieveDestroyAPIView):
 #Lista de indicadores para uso de cualquier barra de busqueda
 class IndicadorSelect(generics.ListCreateAPIView):
     serializer_class = IndicadorSerie
-    def get_queryset(self):
-        indicadores = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
-        return indicadores
+    queryset = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
+    
 
 
 class IndicadorG(generics.ListCreateAPIView):
