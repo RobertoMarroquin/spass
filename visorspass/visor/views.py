@@ -65,20 +65,20 @@ class ReporteAnualDownloadView(View):
 class SelectMapa(generics.ListCreateAPIView):
     serializer_class = IndicadorDescarga
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True,usa_area=True)
+        indicadores = Indicador.objects.filter(mostrar=True,usa_area=True,indicador_general__isnull=True)
         return indicadores
 
 #Descargas
 class IndicadorDescargaView(generics.ListCreateAPIView):
     serializer_class = IndicadorDescarga
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
+        indicadores = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
         return indicadores
 
 
 class DocumentoDescargaView(generics.RetrieveDestroyAPIView):
     serializer_class = IndicadorDocumentoSerializer
-    queryset = Indicador.objects.all()
+    queryset = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
 
 
 class DocumentoView(View):
@@ -107,14 +107,14 @@ class ResultadoRecomendacion(generics.RetrieveDestroyAPIView):
 class IndicadorSelect(generics.ListCreateAPIView):
     serializer_class = IndicadorSerie
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
+        indicadores = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
         return indicadores
 
 
 class IndicadorG(generics.ListCreateAPIView):
     serializer_class = IndicadorGrafico
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
+        indicadores = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
         indicadores = indicadores.annotate(
             num_desagregacion = Count('mediciones__valores_factor')
         ).filter(num_desagregacion__gt=0)
@@ -194,7 +194,7 @@ class IndicadorList(generics.ListCreateAPIView):
     #queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
+        indicadores = Indicador.objects.filter(mostrar=True,indicador_general__isnull=True)
         #indicadores = indicadores.annotate(
         #    num_desagregacion = Count('mediciones__valores_factor')
         #).filter(num_desagregacion__gt=0)
@@ -208,7 +208,7 @@ class MedicionIndicadorList(generics.ListCreateAPIView):
             indicador = self.kwargs['indicador']
         else:
             indicador = None
-        return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
+        return MedicionIndicador.objects.filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
 
 
 #Detalles API
