@@ -309,7 +309,7 @@ class IndicadorRelacionado(serializers.ModelSerializer):
 
 
 class ResultadoSerializer2(serializers.ModelSerializer):
-    indicadores = IndicadorSerie(many=True, read_only=True,queryset=Indicador.objects.filter(mostrar=True,indicador_general__isnull=True))
+    indicadores = IndicadorSerie(many=True, read_only=True)
     class Meta:
         model = Resultado
         fields = ("id","codigo","resultado","presupuesto",'indicadores')
