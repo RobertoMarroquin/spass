@@ -72,7 +72,7 @@ class SelectMapa(generics.ListCreateAPIView):
 class IndicadorDescargaView(generics.ListCreateAPIView):
     serializer_class = IndicadorDescarga
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True)
+        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
         return indicadores
 
 
@@ -114,7 +114,7 @@ class IndicadorSelect(generics.ListCreateAPIView):
 class IndicadorG(generics.ListCreateAPIView):
     serializer_class = IndicadorGrafico
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True)
+        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
         indicadores = indicadores.annotate(
             num_desagregacion = Count('mediciones__valores_factor')
         ).filter(num_desagregacion__gt=0)
@@ -194,7 +194,7 @@ class IndicadorList(generics.ListCreateAPIView):
     #queryset = Indicador.objects.all()
     serializer_class = H_IndicadorSerializer
     def get_queryset(self):
-        indicadores = Indicador.objects.all().filter(mostrar=True)
+        indicadores = Indicador.objects.all().filter(mostrar=True,indicador_general__isnull=True)
         #indicadores = indicadores.annotate(
         #    num_desagregacion = Count('mediciones__valores_factor')
         #).filter(num_desagregacion__gt=0)
