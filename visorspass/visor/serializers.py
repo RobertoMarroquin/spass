@@ -255,6 +255,13 @@ class IndicadorGrafico(serializers.ModelSerializer):
     class Meta:
         model = Indicador
         fields = ['pk','nombre','factores_desagregacion']
+#################################################################################
+#-----------------------------------list serializer para Indicador Serie-------------------------------------#
+class FilteredListSerializer(serializers.ListSerializer):
+
+    def to_representation(self, data):
+        data = data.filter(indicador_general__isnull=True)
+        return super(FilteredListSerializer, self).to_representation(data)
 
 
 class IndicadorSerie(serializers.ModelSerializer):
@@ -266,6 +273,7 @@ class IndicadorSerie(serializers.ModelSerializer):
 
     class Meta:
         model = Indicador
+        list_serializer_class = FilteredListSerializer
         fields = ['code','label','url','name',"resultado"]
 
     def get_code(self,indicador):
