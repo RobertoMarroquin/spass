@@ -57,7 +57,7 @@ class IndicadorAdmin(admin.ModelAdmin):
         'variable',
     )
     search_fields = list_display[:5]+('variable__nombre',)
-    list_filter = ['alcance',]
+    list_filter = ['alcance','resultado__eje']
     filter_horizontal = [
         "factores_desagregacion",
         "fuentes_informacion",
