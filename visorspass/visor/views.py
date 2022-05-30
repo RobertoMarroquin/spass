@@ -96,7 +96,7 @@ class GraficaV(generics.ListCreateAPIView):
             indicador = self.kwargs['indicador']
         else:
             indicador = None
-        return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
+        return MedicionIndicador.objects.all().filter(indicador__id=indicador).order_by('codigo','ano','indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('codigo','ano','indicador','fecha')
 
 #detalle de Resultados para uso en recomendaciones de Ficha
 class ResultadoRecomendacion(generics.RetrieveDestroyAPIView):
@@ -207,7 +207,7 @@ class MedicionIndicadorList(generics.ListCreateAPIView):
             indicador = self.kwargs['indicador']
         else:
             indicador = None
-        return MedicionIndicador.objects.filter(indicador__id=indicador).order_by('indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('indicador','fecha')
+        return MedicionIndicador.objects.filter(indicador__id=indicador).order_by('codigo','ano','indicador','fecha') if indicador else MedicionIndicador.objects.all().order_by('codigo','ano','indicador','fecha')
 
 
 #Detalles API
@@ -272,7 +272,7 @@ class IndicadorDetail(generics.RetrieveDestroyAPIView):
 
 
 class MedicionIndicadorDetail(generics.RetrieveDestroyAPIView):
-    queryset = MedicionIndicador.objects.all()
+    queryset = MedicionIndicador.objects.all().order_by('codigo','ano')
     serializer_class = H_MedicionSerializer    
 
 
